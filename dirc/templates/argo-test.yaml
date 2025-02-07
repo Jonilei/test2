@@ -20,3 +20,4 @@ spec:
           sleep 10000000
       nodeSelector:
         argo: enable
+      restartPolicy: OnFailure
