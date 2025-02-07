@@ -1,5 +1,5 @@
 apiVersion: argoproj.io/v1alpha1
-kind: Workflow
+kind: Job
 metadata:
   name: debug-template
   namespace: argo
@@ -17,6 +17,6 @@ spec:
         command: ["/bin/sh", "-c"]
         args:
         - |
-          sleep 5
+          sleep 10000000
       nodeSelector:
         argo: enable
