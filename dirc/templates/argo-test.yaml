@@ -12,7 +12,7 @@ spec:
       metadata:
         annotations:
           sidecar.istio.io/inject: 'false'
-      container:
+      containers:
       - name: debug
         image: swr.ap-southeast-3.myhuaweicloud.com/powercloud/dp_xac_service:24.4.400_20241210162714
         command: ["/bin/sh", "-c"]
