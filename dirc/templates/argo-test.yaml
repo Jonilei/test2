@@ -1,24 +1,24 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: debug-template
+  name: image-puller-job
   namespace: argo
 spec:
-  entrypoint: debug-template
-  imagePullSecrets:
-    - name: default-secret
-  templates:
-    - name: debug-template
-      metadata:
-        annotations:
-          sidecar.istio.io/inject: 'false'
+  template:
+    metadata:
+      labels:
+        app: image-puller-job
+    spec:
+      nodeSelector:
+        argo: enable
+      imagePullSecrets:
+        - name: default-secret  # 指定 imagePullSecret 的名称
       containers:
-      - name: debug
+      - name: image-puller
         image: swr.ap-southeast-3.myhuaweicloud.com/powercloud/dp_xac_service:24.4.400_20241210162714
+        imagePullPolicy: IfNotPresent
         command: ["/bin/sh", "-c"]
         args:
         - |
           sleep 10000000
-      nodeSelector:
-        argo: enable
       restartPolicy: OnFailure
